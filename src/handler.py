@@ -35,6 +35,7 @@ INPUT_SCHEMA = {
     "seed": {
         "type": int,
         "required": False,
+        "default": None,
         # "title": "Seed",
         # "x-order": 14,
         # "description": "Seed for random number generator. If None or -1, a random seed will be used."
@@ -127,7 +128,8 @@ INPUT_SCHEMA = {
         # "x-order": 6,
         # "description": "End time of the audio file to use for continuation. If -1 or None, will default to the end of the audio clip.",
         # "constraints": lambda continuation_end: continuation_end > 0,
-        "required": False
+        "required": False,
+        "default": -1
     },
     "continuation_start": {
         "type": int,
@@ -136,7 +138,7 @@ INPUT_SCHEMA = {
         # "minimum": 0,
         # "x-order": 5,
         # "description": "Start time of the audio file to use for continuation.",
-        "constraints": lambda continuation_start: continuation_start > 0,
+        # "constraints": lambda continuation_start: continuation_start > 0,
         "required": False
     },
     "multi_band_diffusion": {
