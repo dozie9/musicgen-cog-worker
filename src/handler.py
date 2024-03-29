@@ -74,11 +74,11 @@ INPUT_SCHEMA = {
     "input_audio": {
         "type": str,
         # "title": "Input Audio",
-        "format": "uri",
+        # "format": "uri",
         # "x-order": 2,
         # "description": "An audio file that will influence the generated music. If `continuation` is `True`, the generated music will be a continuation of the audio file. Otherwise, the generated music will mimic the audio file's melody.",
         "required": False,
-        "default": None
+        "default": ''
     },
     "temperature": {
         "type": float,
