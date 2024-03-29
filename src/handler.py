@@ -87,7 +87,7 @@ INPUT_SCHEMA = {
         "required": False
     },
     "continuation": {
-        "type": "boolean",
+        "type": bool,
         # "title": "Continuation",
         "default": False,
         # "x-order": 4,
@@ -126,7 +126,7 @@ INPUT_SCHEMA = {
         # "minimum": 0,
         # "x-order": 6,
         # "description": "End time of the audio file to use for continuation. If -1 or None, will default to the end of the audio clip.",
-        "constraints": lambda continuation_end: continuation_end > 0,
+        # "constraints": lambda continuation_end: continuation_end > 0,
         "required": False
     },
     "continuation_start": {
@@ -174,7 +174,6 @@ INPUT_SCHEMA = {
         "required": True
     },
 }
-
 # ----------------------------- Start API Service ---------------------------- #
 # Call "python -m cog.server.http" in a subprocess to start the API service.
 subprocess.Popen(["python", "-m", "cog.server.http"])
