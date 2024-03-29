@@ -34,125 +34,140 @@ sad_app = initialize_app(sad_cred_obj, name='sadtalker')
 INPUT_SCHEMA = {
     "seed": {
         "type": int,
-        "title": "Seed",
-        "x-order": 14,
-        "description": "Seed for random number generator. If None or -1, a random seed will be used."
+        "required": False,
+        # "title": "Seed",
+        # "x-order": 14,
+        # "description": "Seed for random number generator. If None or -1, a random seed will be used."
     },
     "top_k": {
         "type": int,
-        "title": "Top K",
+        # "title": "Top K",
         "default": 250,
-        "x-order": 9,
-        "description": "Reduces sampling to the k most likely tokens."
+        "required": False,
+        # "x-order": 9,
+        # "description": "Reduces sampling to the k most likely tokens."
     },
     "top_p": {
         "type": float,
-        "title": "Top P",
+        # "title": "Top P",
         "default": 0,
-        "x-order": 10,
-        "description": "Reduces sampling to tokens with cumulative probability of p. When set to  `0` (default), top_k sampling is used."
+        "required": False,
+        # "x-order": 10,
+        # "description": "Reduces sampling to tokens with cumulative probability of p. When set to  `0` (default), top_k sampling is used."
     },
     "prompt": {
         "type": str,
-        "title": "Prompt",
-        "x-order": 1,
-        "description": "A description of the music you want to generate.",
+        # "title": "Prompt",
+        # "x-order": 1,
+        # "description": "A description of the music you want to generate.",
         "required": True
     },
     "duration": {
         "type": int,
-        "title": "Duration",
+        # "title": "Duration",
         "default": 8,
-        "x-order": 3,
-        "description": "Duration of the generated audio in seconds."
+        # "x-order": 3,
+        # "description": "Duration of the generated audio in seconds.",
+        "required": False
     },
     "input_audio": {
         "type": str,
-        "title": "Input Audio",
+        # "title": "Input Audio",
         "format": "uri",
-        "x-order": 2,
-        "description": "An audio file that will influence the generated music. If `continuation` is `True`, the generated music will be a continuation of the audio file. Otherwise, the generated music will mimic the audio file's melody."
+        # "x-order": 2,
+        # "description": "An audio file that will influence the generated music. If `continuation` is `True`, the generated music will be a continuation of the audio file. Otherwise, the generated music will mimic the audio file's melody.",
+        "required": False
     },
     "temperature": {
         "type": float,
-        "title": "Temperature",
+        # "title": "Temperature",
         "default": 1,
-        "x-order": 11,
-        "description": "Controls the 'conservativeness' of the sampling process. Higher temperature means more diversity."
+        # "x-order": 11,
+        # "description": "Controls the 'conservativeness' of the sampling process. Higher temperature means more diversity.",
+        "required": False
     },
     "continuation": {
         "type": "boolean",
-        "title": "Continuation",
+        # "title": "Continuation",
         "default": False,
-        "x-order": 4,
-        "description": "If `True`, generated music will continue from `input_audio`. Otherwise, generated music will mimic `input_audio`'s melody."
+        # "x-order": 4,
+        # "description": "If `True`, generated music will continue from `input_audio`. Otherwise, generated music will mimic `input_audio`'s melody.",
+        "required": False
     },
     "model_version": {
         "type": str,
-        "title": "model_version",
-        "description": "Model to use for generation",
+        # "title": "model_version",
+        # "description": "Model to use for generation",
         "default": "stereo-melody-large",
-        "x-order": 0,
+        # "x-order": 0,
         "constraints": lambda model_version: model_version in [
             "stereo-melody-large",
             "stereo-large",
             "melody-large",
             "large"
         ],
+        "required": False
     },
     "output_format": {
         "type": str,
-        "title": "output_format",
-        "description": "Output format for generated audio.",
+        # "title": "output_format",
+        # "description": "Output format for generated audio.",
         "default": "mp3",
-        "x-order": 13,
+        # "x-order": 13,
         "constraints": lambda output_format: output_format in [
             "wav",
             "mp3"
         ],
+        "required": False
     },
     "continuation_end": {
         "type": int,
-        "title": "Continuation End",
-        "minimum": 0,
-        "x-order": 6,
-        "description": "End time of the audio file to use for continuation. If -1 or None, will default to the end of the audio clip."
+        # "title": "Continuation End",
+        # "minimum": 0,
+        # "x-order": 6,
+        # "description": "End time of the audio file to use for continuation. If -1 or None, will default to the end of the audio clip.",
+        "constraints": lambda continuation_end: continuation_end > 0,
+        "required": False
     },
     "continuation_start": {
         "type": int,
-        "title": "Continuation Start",
+        # "title": "Continuation Start",
         "default": 0,
-        "minimum": 0,
-        "x-order": 5,
-        "description": "Start time of the audio file to use for continuation."
+        # "minimum": 0,
+        # "x-order": 5,
+        # "description": "Start time of the audio file to use for continuation.",
+        "constraints": lambda continuation_start: continuation_start > 0,
+        "required": False
     },
     "multi_band_diffusion": {
-        "type": "boolean",
-        "title": "Multi Band Diffusion",
+        "type": bool,
+        # "title": "Multi Band Diffusion",
         "default": False,
-        "x-order": 7,
-        "description": "If `True`, the EnCodec tokens will be decoded with MultiBand Diffusion. Only works with non-stereo models."
+        # "x-order": 7,
+        # "description": "If `True`, the EnCodec tokens will be decoded with MultiBand Diffusion. Only works with non-stereo models.",
+        "required": False
     },
     "normalization_strategy": {
-
         "type": str,
-        "title": "normalization_strategy",
-        "description": "Strategy for normalizing audio.",
+        # "title": "normalization_strategy",
+        # "description": "Strategy for normalizing audio.",
         "default": "loudness",
-        "x-order": 8,
+        # "x-order": 8,
         "constraints": lambda normalization_strategy: normalization_strategy in [
             "loudness",
             "clip",
             "peak",
             "rms"
         ],
+        "required": False
     },
     "classifier_free_guidance": {
         "type": int,
-        "title": "Classifier Free Guidance",
+        # "title": "Classifier Free Guidance",
         "default": 3,
-        "x-order": 12,
-        "description": "Increases the influence of inputs on the output. Higher values produce lower-varience outputs that adhere more closely to inputs."
+        # "x-order": 12,
+        # "description": "Increases the influence of inputs on the output. Higher values produce lower-varience outputs that adhere more closely to inputs.",
+        "required": False
     },
     "user_id": {
         "type": str,
