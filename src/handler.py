@@ -283,6 +283,8 @@ def handler(event):
             'errors': validated_input['errors']
         }
 
+    logger.info(f'Received event: {validated_input}')
+
     json = run_inference({"input": validated_input})
 
     file_url = to_file(json["output"])
