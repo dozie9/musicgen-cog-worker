@@ -257,7 +257,7 @@ def to_firestore(audio_url, user_id):
 
 def upload_audio(filename):
     destination_blob_name = f'musicgen/{filename}'
-    bucket = storage.bucket()
+    bucket = storage.bucket(app=default_app)
     blob = bucket.blob(destination_blob_name)
     blob.upload_from_filename(filename)
 
