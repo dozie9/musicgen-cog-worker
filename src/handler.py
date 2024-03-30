@@ -289,11 +289,11 @@ def handler(event):
 
     file_url = to_file(json["output"])
 
-    to_firestore(file_url, validated_input['user_id'])
+    to_firestore(file_url, event['input']['user_id'])
 
     return {
         'url': file_url,
-        'user_id': validated_input['user_id']
+        'user_id': event['input']['user_id']
     }
 
 
