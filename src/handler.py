@@ -5,6 +5,7 @@ import subprocess
 import json
 import os
 import uuid
+from datetime import datetime
 
 import runpod
 from runpod.serverless.modules.rp_logger import RunPodLogger
@@ -239,10 +240,15 @@ def to_file(data: str):
 
 def to_firestore(audio_url, user_id):
     db = firestore.client(app=sad_app)
+
+    current_utc_time = datetime.utcnow()
+    formatted_time = current_utc_time.strftime("%Y-%m-%d %H:%M:%S")
+
     push_data = {
         "uploaderId": user_id,
         # "videoCaption": prompt,
         "audioUrl": audio_url,
+        "timestamp": formatted_time
     }
 
     collection_path = "audioList"
