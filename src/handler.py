@@ -248,7 +248,8 @@ def to_firestore(audio_url, user_id):
         "uploaderId": user_id,
         # "videoCaption": prompt,
         "audioUrl": audio_url,
-        "timestamp": formatted_time
+        "timestamp": formatted_time,
+        "api": "musicgen"
     }
 
     collection_path = "audioList"
