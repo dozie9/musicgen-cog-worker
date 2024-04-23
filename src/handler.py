@@ -234,7 +234,6 @@ def to_file(data: str):
 
     with open(filename, 'wb') as f:
         f.write(decoded_data)
-
     return upload_audio(filename)
 
 
